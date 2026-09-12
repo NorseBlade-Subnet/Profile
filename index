@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NORSEBLADE // LINK_NEXUS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cp-yellow: #fcee0a;
+      --cp-cyan: #00f0ff;
+      --cp-red: #ff003c;
+      --cp-black: #0d0e15;
+      --cp-dark-gray: #12131a;
+      --cp-panel-bg: rgba(18, 19, 26, 0.88);
+      --cp-text: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--cp-black);
+      color: var(--cp-text);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(13, 14, 21, 0.95), rgba(13, 14, 21, 0.85));
+      background-size: 24px 24px, 100% 100%;
+    }
+
+    /* CRT Scanline FX */
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Ambient Background Glow */
+    .bg-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: var(--cp-cyan);
+      filter: blur(150px);
+      opacity: 0.12;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Main Container HUD Panel */
+    .nexus-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      background: var(--cp-panel-bg);
+      border: 2px solid var(--cp-cyan);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
+      padding: 35px 25px 25px;
+      clip-path: polygon(0 0, 92% 0, 100% 4%, 100% 100%, 8% 100%, 0 96%);
+      z-index: 2;
+    }
+
+    /* HUD Corner Cutouts & Deco */
+    .nexus-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 100%;
+      background: var(--cp-yellow);
+      clip-path: polygon(0 0, 100% 0, 100% 15%, 0 18%);
+    }
+
+    .hud-tag {
+      position: absolute;
+      top: 6px;
+      right: 15px;
+      font-size: 0.7rem;
+      color: var(--cp-yellow);
+      letter-spacing: 2px;
+      background: rgba(252, 238, 10, 0.1);
+      padding: 2px 8px;
+      border: 1px solid var(--cp-yellow);
+    }
+
+    /* Profile Header */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .avatar-wrapper {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 15px;
+      position: relative;
+      border: 2px solid var(--cp-yellow);
+      background: var(--cp-dark-gray);
+      clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+      box-shadow: 0 0 10px rgba(252, 238, 10, 0.3);
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Teko', sans-serif;
+      font-size: 2.2rem;
+      color: var(--cp-cyan);
+      background: linear-gradient(135deg, #181b26 0%, #0d0e15 100%);
+    }
+
+    .username {
+      font-family: 'Teko', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--cp-yellow);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 0px var(--cp-red), -1px -1px 0px var(--cp-cyan);
+    }
+
+    .sub-heading {
+      color: var(--cp-cyan);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Section Headers */
+    .category-title {
+      font-size: 0.75rem;
+      color: var(--cp-yellow);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 20px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-title::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cp-yellow), transparent);
+    }
+
+    /* Links Grid */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(24, 27, 38, 0.7);
+      color: var(--cp-text);
+      text-decoration: none;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      font-size: 0.95rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.15s ease-in-out;
+      clip-path: polygon(0 0, 97% 0, 100% 25%, 100% 100%, 3% 100%, 0 75%);
+    }
+
+    .link-btn::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--cp-cyan);
+      transition: all 0.15s ease-in-out;
+    }
+
+    .link-btn:hover {
+      background: var(--cp-yellow);
+      color: var(--cp-black);
+      border-color: var(--cp-yellow);
+      box-shadow: 0 0 12px rgba(252, 238, 10, 0.6);
+      transform: translateX(4px);
+    }
+
+    .link-btn:hover::before {
+      background: var(--cp-red);
+      width: 6px;
+    }
+
+    .link-btn .node-id {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      margin-right: 10px;
+    }
+
+    .link-btn:hover .node-id {
+      opacity: 1;
+      color: var(--cp-black);
+    }
+
+    .badge-store {
+      font-size: 0.65rem;
+      background: var(--cp-red);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* System Footer */
+    .sys-footer {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(0, 240, 255, 0.3);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: rgba(226, 232, 240, 0.5);
+    }
+
+    .sys-footer .status-online {
+      color: #00ff66;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <div class="nexus-card">
+    <div class="hud-tag">NET_NODE // 0x9F4</div>
+
+    <!-- Profile Info -->
+    <div class="profile-header">
+      <div class="avatar-wrapper">
+        <!-- Swap out placeholder div with your avatar image if available -->
+        <!-- <img src="avatar.jpg" alt="NorseBlade Avatar"> -->
+        <div class="avatar-placeholder">NB</div>
+      </div>
+      <h1 class="username">NORSEBLADE</h1>
+      <div class="sub-heading">// DIGITAL VENDOR & NETRUNNER</div>
+    </div>
+
+    <!-- Storefront Section -->
+    <div class="category-title">01 // MERCHANT PROTOCOLS</div>
+    <div class="link-list">
+      <a href="https://yourstore.com" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[01]</span> BLACK MARKET STORE</span>
+        <span class="badge-store">SUPPLIES</span>
+      </a>
+      <a href="https://yourstore.com/merch" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[02]</span> CYBERWARE & GEAR</span>
+        <span class="badge-store">GEAR</span>
+      </a>
+    </div>
+
+    <!-- Social Subnets Section -->
+    <div class="category-title">02 // SOCIAL TELEMETRY</div>
+    <div class="link-list">
+      <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[03]</span> YOUTUBE MATRIX</span>
+      </a>
+      <a href="https://twitch.tv/yourchannel" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[04]</span> LIVE NEURAL FEED (TWITCH)</span>
+      </a>
+      <a href="https://x.com/yourhandle" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[05]</span> X // BROADCASTS</span>
+      </a>
+      <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[06]</span> VISUAL ARCHIVES</span>
+      </a>
+      <a href="https://discord.gg/yourserver" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[07]</span> DISCORD SUBNET</span>
+      </a>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="sys-footer">
+      <span>GRID CONNECTION: <span class="status-online">SECURE</span></span>
+      <span>LOC: /SYS/NORSEBLADE</span>
+    </div>
+  </div>
+
+  <!-- Audio Synthesizer Script for Hover Effects -->
+  <script>
+    // Web Audio API Synth to play subtle cyberpunk blips without external audio files
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playBlip() {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.05);
+      
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    }
+
+    document.querySelectorAll('.link-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', playBlip);
+    });
+  </script>
+</body>
+</html>
