@@ -125,12 +125,6 @@
       box-shadow: 0 0 10px rgba(252, 238, 10, 0.3);
     }
 
-    .avatar-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     .avatar-placeholder {
       width: 100%;
       height: 100%;
@@ -273,44 +267,54 @@
     <!-- Profile Info -->
     <div class="profile-header">
       <div class="avatar-wrapper">
-        <!-- Swap out placeholder div with your avatar image if available -->
-        <!-- <img src="avatar.jpg" alt="NorseBlade Avatar"> -->
         <div class="avatar-placeholder">NB</div>
       </div>
       <h1 class="username">NORSEBLADE</h1>
       <div class="sub-heading">// DIGITAL VENDOR & NETRUNNER</div>
     </div>
 
-    <!-- Storefront Section -->
-    <div class="category-title">01 // MERCHANT PROTOCOLS</div>
+    <!-- Merchant Section -->
+    <div class="category-title">01 // MERCHANT & COMMERCE</div>
     <div class="link-list">
-      <a href="https://yourstore.com" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[01]</span> BLACK MARKET STORE</span>
-        <span class="badge-store">SUPPLIES</span>
-      </a>
-      <a href="https://yourstore.com/merch" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[02]</span> CYBERWARE & GEAR</span>
-        <span class="badge-store">GEAR</span>
+      <a href="https://poshmark.com/closet/norseblade" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[01]</span> POSHMARK // BLACK MARKET</span>
+        <span class="badge-store">STORE</span>
       </a>
     </div>
 
-    <!-- Social Subnets Section -->
+    <!-- Socials & Comms Section -->
     <div class="category-title">02 // SOCIAL TELEMETRY</div>
     <div class="link-list">
-      <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[03]</span> YOUTUBE MATRIX</span>
+      <a href="https://www.instagram.com/naslittle1795/" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[02]</span> INSTAGRAM // VISUAL FEEDS</span>
       </a>
-      <a href="https://twitch.tv/yourchannel" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[04]</span> LIVE NEURAL FEED (TWITCH)</span>
+      <a href="https://www.reddit.com/user/NasB2k17/" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[03]</span> REDDIT // SUBNET COMMS</span>
       </a>
-      <a href="https://x.com/yourhandle" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[05]</span> X // BROADCASTS</span>
+    </div>
+
+    <!-- Gaming & Tech Section -->
+    <div class="category-title">03 // GAMING & REPOS</div>
+    <div class="link-list">
+      <a href="https://steamcommunity.com/id/NorseBlade/" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[04]</span> STEAM // NEURAL LINK</span>
       </a>
-      <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[06]</span> VISUAL ARCHIVES</span>
+      <a href="https://github.com/NorseBlade-Subnet" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[05]</span> GITHUB // CODE MATRIX</span>
       </a>
-      <a href="https://discord.gg/yourserver" target="_blank" rel="noopener" class="link-btn">
-        <span><span class="node-id">[07]</span> DISCORD SUBNET</span>
+      <a href="https://themebeta.com/chrome/user/2594171" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[06]</span> THEMEBETA // UI SKINS</span>
+      </a>
+    </div>
+
+    <!-- Anime Archives Section -->
+    <div class="category-title">04 // DATA ARCHIVES</div>
+    <div class="link-list">
+      <a href="https://myanimelist.net/profile/Akitsu283" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[07]</span> MYANIMELIST // LOGS</span>
+      </a>
+      <a href="https://kitsu.app/users/1166476" target="_blank" rel="noopener" class="link-btn">
+        <span><span class="node-id">[08]</span> KITSU // MEDIA ARCHIVE</span>
       </a>
     </div>
 
@@ -321,9 +325,8 @@
     </div>
   </div>
 
-  <!-- Audio Synthesizer Script for Hover Effects -->
+  <!-- Audio Synthesizer Script -->
   <script>
-    // Web Audio API Synth to play subtle cyberpunk blips without external audio files
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
     function playBlip() {
